@@ -1,70 +1,171 @@
-# Getting Started with Create React App
+# Mini Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## List of Library that used in this Project
 
-## Available Scripts
+1.  **axios: 0.27.2**
+2.  **bootstrap: 5.1.3**
+3.  **js-cookie: 3.0.1**
+4.  **node-sass: 7.0.1**
+5.  **react: 18.1.0**
+6.  **react-bootstrap: 2.4.0**
+7.  **react-dom: 18.1.0**
+8.  **react-loading: 2.0.3**
+9.  **react-router-dom: 6.3.0**
+10. **react-scripts: 5.0.1**
+11. **react-tsparticles: 2.0.6**
+12. **sweetalert: 2.1.2**
+13. **tsparticles: 2.0.6**
 
-In the project directory, you can run:
+# POST /register
 
-### `npm start`
+Creates a new User and returns the new object.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **URL Params**
+  None
+- **Headers**
+  Content-Type: application/json
+- **Data Params**
+  {
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  name: string,
+  address: string,
+  phone_number: integer,
+  password: string
+  }
 
-### `npm test`
+- **Success Response:**
+- **Code:** 200
+- **Content:** {
+  [
+  { <success: 1> }
+  { <data: results> }
+  ]
+  }
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# POST/Login
 
-### `npm run build`
+- **URL Params**
+  None
+- **Headers**
+  Content-Type: application/json
+- **Data Params**
+  {
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  name: string,
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  password: string
+  }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Success Response:**
+- **Code:** 200
+-
 
-### `npm run eject`
+# Products
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Product object**
+  {
+  id: integer
+  name: string
+  cost: float(2)
+  quantity: integer
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# GET /products
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Returns all products in the system.
 
-## Learn More
+- **URL Params**
+  None
+- **Data Params**
+  None
+- **Headers**
+  Content-Type: application/json
+- **Authorization:** Bearer <OAuth Token>
+- **Success Response:**
+- **Code:** 200
+  **Content:**
+  {
+  products: [
+  {<product_id>},
+  {<product_name>},
+  {<product_quantity>}
+  {<product_price>}
+  ]
+  }
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# GET /products/auth/:id
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Returns the specified product.
 
-### Code Splitting
+- **URL Params**
+  Required: id=[integer]
+- **Data Params**
+  None
+- **Headers**
+  Content-Type: application/json
+  Authorization: Bearer <OAuth Token>
+- **Success Response:**
+- **Code:** 200
+- **Content:**{
+  [
+  { <product_id> }
+  { <product_name> }
+  { <product_quantity> }
+  { <product_price> }
+  ]
+  }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# POST /products
 
-### Analyzing the Bundle Size
+Creates a new Product and returns the new object.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **URL Params**
+  None
+- **Data Params**
+  {
+  name: string
+  quantity: integer
+  price: integer
+  }
+- **Headers**
+  Content-Type: application/json
+- **Success Response:**
+- **Code:** 200
+- **Content:** { <product_object> }
 
-### Making a Progressive Web App
+# PATCH /products
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Updates fields on the specified product and returns the updated object.
 
-### Advanced Configuration
+- **URL Params**
+  Required: none
+  Data Params
+  {
+  id : int
+  name: string
+  cost: float(2)
+  available_quantity: integer
+  }
+- **Headers**
+  Content-Type: application/json
+  Authorization: Bearer <Auth Token>
+- **Success Response:**
+- **Code:** 200
+- **Content:** { <product_object> }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# DELETE /products/
 
-### Deployment
+Deletes the specified product.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **URL Params**
+  Required: none
+  Data Params
+  {
+  id : int
+  }
+- **Headers**
+  Content-Type: application/json
+  Authorization: Bearer <OAuth Token>
+- **Success Response:**
+  **Code:** 204
